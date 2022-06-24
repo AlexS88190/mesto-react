@@ -1,11 +1,11 @@
 //import logo from './logo.svg';
-import './App.css';
+//import './index.css';
 import logo from './images/logo.svg';
 
 function App() {
   return (
-  <>
-    <div className="App">
+  <div className="page">
+    <div className="page__content">
       <header className="header">
         <img src={logo} alt="логотип Места России" className="header__logo"/>
       </header>
@@ -93,7 +93,7 @@ function App() {
       </div>
     </div>
 
-  </>
+  </div>
   );
 }
 

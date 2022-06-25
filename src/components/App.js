@@ -7,17 +7,42 @@ import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 
-function App(props) {
+function App() {
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
+
+    function handleEditProfileClick() {
+        setIsEditProfilePopupOpen(true);
+    }
+
+    function handleAddPlaceClick() {
+        setIsAddPlacePopupOpen(true);
+    }
+
+    function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true);
+    }
+
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+        setIsEditAvatarPopupOpen(false);
+    }
+
     return (
         <div className="page">
             <div className="page__content">
                 <Header/>
-                <Main/>
+                <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
                 <Footer/>
             </div>
             <PopupWithForm
                 name={'profile'}
                 title={'Редактировать профиль'}
+                isOpen={isEditProfilePopupOpen}
+                onClose={closeAllPopups}
             >
                 <input id="name-input" className="popup__input popup__input_type_name" type="text"
                        placeholder="имя"
@@ -32,6 +57,8 @@ function App(props) {
             <PopupWithForm
                 name={'place'}
                 title={'Новое место'}
+                isOpen={isAddPlacePopupOpen}
+                onClose={closeAllPopups}
             >
                 <input id="place-input" className="popup__input popup__input_type_place" type="text"
                        placeholder="Название" name="place" minLength="2" maxLength="30" required/>
@@ -45,6 +72,8 @@ function App(props) {
             <PopupWithForm
                 name={'update'}
                 title={'Обновить аватар'}
+                isOpen={isEditAvatarPopupOpen}
+                onClose={closeAllPopups}
             >
                 <input id="link-input-avatar" className="popup__input popup__input_type_link" type="url"
                        placeholder="Ссылка на аватар" name="link" required/>
@@ -55,6 +84,7 @@ function App(props) {
             <PopupWithForm
                 name={'remove'}
                 title={'Вы уверены?'}
+                onClose={closeAllPopups}
             >
                 <button className="popup__save-button popup__save-button_remove" type="submit">Да</button>
             </PopupWithForm>

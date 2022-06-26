@@ -6,7 +6,7 @@
     border: 0;
     width: 120px;
     height: 120px;
-    background: rgba(0,0,0,0.8) url("../../../images/edit_avatar.svg") center no-repeat;
+    background: url("../../../images/edit_avatar.svg") rgba(0,0,0,0.8) center no-repeat;
     transition: opacity ease-out 0.5s;
 }
 

@@ -1,18 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { api } from "../utils/API.js";
+import Card from "./Card.js";
 import pictureEditAvatar from '../images/avatar.jpg';
 
 function Main(props) {
-    const [userName, setUserName] = React.useState('Felix Baumgartner');
-    const [userDescription , setUserDescription ] = React.useState('Red Bull Stratos');
-    const [userAvatar, setUserAvatar] = React.useState(pictureEditAvatar);
+    const [userName, setUserName] = React.useState();
+    const [userDescription , setUserDescription ] = React.useState();
+    const [userAvatar, setUserAvatar] = React.useState();
+    const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
         api.getProfileInfo().then(res => {
             setUserName(res.name);
             setUserDescription(res.about);
             setUserAvatar(res.avatar);
+        });
+
+        api.getCards().then(res => {
+            console.log(res)
+            setCards(res)
         });
     },[])
 
@@ -31,7 +38,10 @@ function Main(props) {
                 <p className="profile__subtitle">{userDescription}</p>
             </section>
             <section className="elements">
-                <ul className="elements__list"/>
+
+                <ul className="elements__list">
+                    {cards.map(item => <Card card={item} key={item._id}/>)}
+                </ul>
             </section>
         </main>
     )

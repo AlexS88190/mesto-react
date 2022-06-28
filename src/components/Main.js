@@ -1,8 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import { api } from "../utils/API.js";
 import Card from "./Card.js";
-import pictureEditAvatar from '../images/avatar.jpg';
 
 function Main(props) {
     const [userName, setUserName] = React.useState();
@@ -18,7 +16,6 @@ function Main(props) {
         });
 
         api.getCards().then(res => {
-            console.log(res)
             setCards(res)
         });
     },[])
@@ -40,7 +37,7 @@ function Main(props) {
             <section className="elements">
 
                 <ul className="elements__list">
-                    {cards.map(item => <Card card={item} key={item._id}/>)}
+                    {cards.map(item => <Card card={item} key={item._id} onCardClick={props.onCardClick}/>)}
                 </ul>
             </section>
         </main>

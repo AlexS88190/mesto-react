@@ -8,6 +8,7 @@
     height: 120px;
     background: url("../../../images/edit_avatar.svg") rgba(0,0,0,0.8) center no-repeat;
     transition: opacity ease-out 0.5s;
+    cursor: pointer;
 }
 
 .profile__avatar-button:hover {

@@ -73,13 +73,7 @@ class Api {
 
     _addHandlers(promise) {
         return promise
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
     }
 }
 

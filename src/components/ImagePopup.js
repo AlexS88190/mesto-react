@@ -1,12 +1,12 @@
-function ImagePopup(props) {
+function ImagePopup({card, onClose}) {
 
         return (
-            <div className={`popup popup_type_zoom ${props.card && 'popup_opened'}`}>
+            <div className={`popup popup_type_zoom ${card && 'popup_opened'}`}>
                 <figure className="popup__zoom-container">
                     <button className="popup__close-button popup__close-button_zoom" type="button"
-                            aria-label="закрыть" onClick={props.onClose}/>
-                    <img src={props.card && props.card.link} className="popup__image" alt={props.card && props.card.name}/>
-                    <figcaption className="popup__zoom-title">{props.card && props.card.name}</figcaption>
+                            aria-label="закрыть" onClick={onClose}/>
+                    <img src={card && card.link} className="popup__image" alt={card && card.name}/>
+                    <figcaption className="popup__zoom-title">{card && card.name}</figcaption>
                 </figure>
             </div>
         )

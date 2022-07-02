@@ -2,21 +2,15 @@ import React from 'react';
 import { api } from "../utils/api.js";
 import Card from "./Card.js";
 
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
-    const [userName, setUserName] = React.useState('');
-    const [userDescription , setUserDescription ] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
+
     const [cards, setCards] = React.useState([]);
 
-    React.useEffect(() => {
-        api.getProfileInfo()
-            .then(res => {
-            setUserName(res.name);
-            setUserDescription(res.about);
-            setUserAvatar(res.avatar);
-        })
-            .catch(error => console.log(error));
+    const currentUser = React.useContext(CurrentUserContext);
 
+    React.useEffect(() => {
         api.getCards()
             .then(res => {setCards(res)})
             .catch(error => console.log(error));
@@ -26,15 +20,15 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
         <main className="main">
             <section className="profile">
                 <div className="profile__avatar-container">
-                    <div className="profile__avatar" style={{backgroundImage: `url(${userAvatar})`}}/>
+                    <div className="profile__avatar" style={{backgroundImage: `url(${currentUser.avatar})`}}/>
                     <button className="profile__avatar-button" onClick={onEditAvatar} type="button" aria-label="редактировать аватар"/>
                 </div>
                 <div className="profile__info">
-                    <h1 className="profile__title">{userName}</h1>
+                    <h1 className="profile__title">{currentUser.name}</h1>
                     <button className="profile__edit-button" onClick={onEditProfile} type="button" aria-label="редактировать профиль"/>
                 </div>
                 <button className="profile__add-button" onClick={onAddPlace} type="button" aria-label="добавить"/>
-                <p className="profile__subtitle">{userDescription}</p>
+                <p className="profile__subtitle">{currentUser.about}</p>
             </section>
             <section className="elements">
 

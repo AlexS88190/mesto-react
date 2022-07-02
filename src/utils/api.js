@@ -6,7 +6,7 @@ class Api {
         }
         this._baseUrl = `${baseUrl}/${cohortId}`
     }
-    getProfileInfo = () => {
+    getUserInfo = () => {
         return this._addHandlers(fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         }));

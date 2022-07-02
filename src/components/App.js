@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+
 import {api} from "../utils/api";
 
 function App() {
@@ -148,6 +149,7 @@ function App() {
                     </PopupWithForm>
 
                     <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+
                 </CurrentUserContext.Provider>
             </div>
     );

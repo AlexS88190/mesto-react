@@ -1,8 +1,18 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
-import Card from "./Card";
 
 function EditProfilePopup({isOpen, onClose}) {
+    const [name, setName] = React.useState('');
+    const [description, setDescription ] = React.useState('');
+
+    function handleChangeName(event) {
+        setName(event.target.value)
+    }
+
+    function handleChangeDescription(event) {
+        setDescription(event.target.value)
+    }
+
     return (
         <PopupWithForm
             name='profile'
@@ -19,6 +29,8 @@ function EditProfilePopup({isOpen, onClose}) {
                 name="name_profile"
                 minLength="2"
                 maxLength="40"
+                value={name}
+                onChange={handleChangeName}
                 required
             />
             <span className="name-input-error popup__input-error"/>
@@ -29,6 +41,8 @@ function EditProfilePopup({isOpen, onClose}) {
                 name="about_profile"
                 minLength="2"
                 maxLength="200"
+                value={description}
+                onChange={handleChangeDescription}
                 required
             />
             <span className="about-input-error popup__input-error"/>

@@ -65,10 +65,7 @@ function App() {
                         <Footer/>
                     </div>
 
-
                     <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
-
-
 
                     <PopupWithForm
                         name='place'

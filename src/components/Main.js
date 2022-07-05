@@ -19,9 +19,20 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        });
+        api.changeLikeCardStatus(card._id, !isLiked)
+            .then((newCard) => {
+                setCards(cards.map((c) => c._id === newCard._id ? newCard : c));
+            })
+            .catch(error => console.log(error));
+    }
+
+    function handleCardDelete(card) {
+        //const isOwn = card.owner._id === currentUser._id;
+        api.deleteCard(card._id)
+            .then((res) => {
+                setCards(cards.filter(item => item !== card))
+            })
+            .catch(error => console.log(error));
     }
 
     return (
@@ -41,7 +52,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
             <section className="elements">
 
                 <ul className="elements__list">
-                    {cards.map(item => <Card card={item} key={item._id} onCardClick={onCardClick} onCardLike={handleCardLike}/>)}
+                    {cards.map(item => <Card card={item} key={item._id} onCardClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>)}
                 </ul>
             </section>
         </main>

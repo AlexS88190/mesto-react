@@ -42,7 +42,7 @@ function App() {
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
-        setSelectedCard(null)
+        setSelectedCard(null);
     }
 
     function handleCardClick(itemListCards) {
@@ -54,6 +54,14 @@ function App() {
             .then(res => setCurrentUser(res))
             .catch(error => console.log(error));
         closeAllPopups()
+    }
+
+    function handleUpdateAvatar(avatar) {
+        api.updateAvatar(avatar.avatar)
+            .then(res => setCurrentUser(res))
+            .catch(error => console.log(error));
+        closeAllPopups()
+
     }
 
 
@@ -102,7 +110,7 @@ function App() {
                         <span className="link-input-error popup__input-error"/>
                     </PopupWithForm>
 
-                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 
                     <PopupWithForm
                         name='remove'

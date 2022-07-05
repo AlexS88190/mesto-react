@@ -34,6 +34,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
             })
             .catch(error => console.log(error));
     }
+    //console.log(currentUser.avatar)
 
     return (
         <main className="main">

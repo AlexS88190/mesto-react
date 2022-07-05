@@ -10,6 +10,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 import {api} from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -101,23 +102,7 @@ function App() {
                         <span className="link-input-error popup__input-error"/>
                     </PopupWithForm>
 
-                    <PopupWithForm
-                        name='update'
-                        title='Обновить аватар'
-                        isOpen={isEditAvatarPopupOpen}
-                        onClose={closeAllPopups}
-                        buttonTitleSubmit='Сохранить'
-                    >
-                        <input
-                            id="link-input-avatar"
-                            className="popup__input popup__input_type_link"
-                            type="url"
-                            placeholder="Ссылка на аватар"
-                            name="link"
-                            required
-                        />
-                        <span className="link-input-avatar-error popup__input-error"/>
-                    </PopupWithForm>
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
 
                     <PopupWithForm
                         name='remove'

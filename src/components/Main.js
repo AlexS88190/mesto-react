@@ -13,7 +13,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
     React.useEffect(() => {
         api.getCards()
-            .then(res => {setCards(res)})
+            .then(res => setCards(res))
             .catch(error => console.log(error));
     },[])
 

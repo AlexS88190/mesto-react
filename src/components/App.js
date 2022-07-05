@@ -21,10 +21,8 @@ function App() {
 
     React.useEffect(() => {
         api.getUserInfo()
-            .then(res => {
-                setCurrentUser(res);
-            })
-            .catch(error => console.log(error));
+            .then(res => setCurrentUser(res))
+            .catch(error => console.log(error))
     },[])
 
     function handleEditProfileClick() {
@@ -50,6 +48,13 @@ function App() {
         setSelectedCard(itemListCards)
     }
 
+    function handleUpdateUser(profile) {
+        api.updateProfileInfo(profile.name, profile.about)
+            .then(res => setCurrentUser(res))
+            .catch(error => console.log(error));
+        closeAllPopups()
+    }
+
 
     return (
             <div className="page">
@@ -65,7 +70,7 @@ function App() {
                         <Footer/>
                     </div>
 
-                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
                     <PopupWithForm
                         name='place'

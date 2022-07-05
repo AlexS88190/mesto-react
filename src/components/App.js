@@ -20,6 +20,27 @@ function App() {
 
     const [currentUser, setCurrentUser] = React.useState('');
 
+    const [cards, setCards] = React.useState([]);
+
+    React.useEffect(() => {
+        api.getCards()
+            .then(res => setCards(res))
+            .catch(error => console.log(error));
+    },[])
+
+    function handleCardLike(card) {
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        api.changeLikeCardStatus(card._id, !isLiked)
+            .then(newCard => setCards(cards.map((c) => c._id === newCard._id ? newCard : c)))
+            .catch(error => console.log(error));
+    }
+
+    function handleCardDelete(card) {
+        api.deleteCard(card._id)
+            .then(setCards(cards.filter(item => item !== card)))
+            .catch(error => console.log(error));
+    }
+
     React.useEffect(() => {
         api.getUserInfo()
             .then(res => setCurrentUser(res))
@@ -75,6 +96,9 @@ function App() {
                             onAddPlace={handleAddPlaceClick}
                             onEditAvatar={handleEditAvatarClick}
                             onCardClick={handleCardClick}
+                            cards={cards}
+                            onCardLike={handleCardLike}
+                            onCardDelete={handleCardDelete}
                         />
                         <Footer/>
                     </div>

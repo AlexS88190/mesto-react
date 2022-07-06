@@ -70,20 +70,6 @@ class Api {
         }));
     }
 
-    // like = (cardId) => {
-    //     return this._addHandlers(fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-    //         method: 'PUT',
-    //         headers: this._headers
-    //     }));
-    // }
-    //
-    // dislike = (cardId) => {
-    //     return this._addHandlers(fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-    //         method: 'DELETE',
-    //         headers: this._headers
-    //     }));
-    // }
-
     _addHandlers(promise) {
         return promise
             .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))

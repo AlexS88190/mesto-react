@@ -5,9 +5,7 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
-
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-
 import {api} from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
@@ -29,6 +27,12 @@ function App() {
             .catch(error => console.log(error));
     },[])
 
+    React.useEffect(() => {
+        api.getUserInfo()
+            .then(res => setCurrentUser(res))
+            .catch(error => console.log(error))
+    },[])
+
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
         api.changeLikeCardStatus(card._id, !isLiked)
@@ -41,12 +45,6 @@ function App() {
             .then(setCards(cards.filter(item => item !== card)))
             .catch(error => console.log(error));
     }
-
-    React.useEffect(() => {
-        api.getUserInfo()
-            .then(res => setCurrentUser(res))
-            .catch(error => console.log(error))
-    },[])
 
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
@@ -83,9 +81,14 @@ function App() {
             .then(res => setCurrentUser(res))
             .catch(error => console.log(error));
         closeAllPopups()
-
     }
 
+    function handleAddPlaceSubmit(card) {
+        api.addCard(card.nameCard, card.linkCard)
+            .then(newCard => setCards([newCard, ...cards]))
+            .catch(error => console.log(error));
+        closeAllPopups()
+    }
 
     return (
             <div className="page">
@@ -106,7 +109,7 @@ function App() {
 
                     <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
-                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 

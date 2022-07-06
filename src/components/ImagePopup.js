@@ -10,7 +10,6 @@ function ImagePopup({card, onClose}) {
                 </figure>
             </div>
         )
-
 }
 
 export default ImagePopup;

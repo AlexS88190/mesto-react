@@ -11,6 +11,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import {api} from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import AddPlacePopup from "./AddPlacePopup.js";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -105,34 +106,7 @@ function App() {
 
                     <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
-                    <PopupWithForm
-                        name='place'
-                        title='Новое место'
-                        isOpen={isAddPlacePopupOpen}
-                        onClose={closeAllPopups}
-                        buttonTitleSubmit='Создать'
-                    >
-                        <input
-                            id="place-input"
-                            className="popup__input popup__input_type_place"
-                            type="text"
-                            placeholder="Название"
-                            name="place"
-                            minLength="2"
-                            maxLength="30"
-                            required
-                        />
-                        <span className="place-input-error popup__input-error"/>
-                        <input
-                            id="link-input"
-                            className="popup__input popup__input_type_link"
-                            type="url"
-                            placeholder="Ссылка на картинку"
-                            name="link"
-                            required
-                        />
-                        <span className="link-input-error popup__input-error"/>
-                    </PopupWithForm>
+                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
 
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 

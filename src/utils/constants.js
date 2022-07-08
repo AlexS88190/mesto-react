@@ -11,5 +11,3 @@ export const saveText = 'Сохранить';
 export const savingText = 'Сохранение...';
 export const createText = 'Создать';
 export const creationText = 'Создание...';
-export const yesText = 'Да';
-export const removingText = 'Удаление...';

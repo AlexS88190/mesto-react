@@ -17,7 +17,7 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState(null);
 
-    const [currentUser, setCurrentUser] = React.useState('');
+    const [currentUser, setCurrentUser] = React.useState({});
 
     const [cards, setCards] = React.useState([]);
 
@@ -25,9 +25,7 @@ function App() {
         api.getCards()
             .then(res => setCards(res))
             .catch(error => console.log(error));
-    },[])
 
-    React.useEffect(() => {
         api.getUserInfo()
             .then(res => setCurrentUser(res))
             .catch(error => console.log(error))
@@ -42,7 +40,7 @@ function App() {
 
     function handleCardDelete(card) {
         api.deleteCard(card._id)
-            .then(setCards(cards.filter(item => item !== card)))
+            .then(() => setCards(cards.filter(item => item !== card)))
             .catch(error => console.log(error));
     }
 
@@ -71,23 +69,31 @@ function App() {
 
     function handleUpdateUser(profile) {
         api.updateProfileInfo(profile.name, profile.about)
-            .then(res => setCurrentUser(res))
+            .then((res) => {
+                setCurrentUser(res);
+                closeAllPopups();
+            })
             .catch(error => console.log(error));
-        closeAllPopups()
     }
 
     function handleUpdateAvatar(avatar) {
         api.updateAvatar(avatar.avatar)
-            .then(res => setCurrentUser(res))
+            .then((res) => {
+                setCurrentUser(res)
+                closeAllPopups();
+            })
             .catch(error => console.log(error));
-        closeAllPopups()
+
     }
 
     function handleAddPlaceSubmit(card) {
         api.addCard(card.nameCard, card.linkCard)
-            .then(newCard => setCards([newCard, ...cards]))
+            .then((newCard) => {
+                setCards([newCard, ...cards])
+                closeAllPopups();
+            })
             .catch(error => console.log(error));
-        closeAllPopups()
+
     }
 
     return (

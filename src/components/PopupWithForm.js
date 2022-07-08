@@ -8,7 +8,7 @@ function PopupWithForm({name, title, isOpen, onClose, buttonTitleSubmit, childre
                 <button className="popup__close-button popup__close-button_profile" type="button"
                         aria-label="закрыть" onClick={onClose}/>
                 <h2 className="popup__title">{title}</h2>
-                <form className={`popup__form popup__form_${name}`} name={name} onSubmit={onSubmit} noValidate>
+                <form className={`popup__form popup__form_${name}`} name={name} onSubmit={onSubmit}>
                     {children}
                     <button className="popup__save-button" type="submit">{buttonTitleSubmit}</button>
                 </form>
